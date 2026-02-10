@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Voice Emotion Dashboard</title>
+    <style>
+        body { font-family: Arial; padding: 20px; }
+        .result-item { padding: 10px; border-bottom: 1px solid #eee; }
+        .chart { margin-top: 20px; }
+    </style>
+</head>
+<body>
+    <h1>Voice Emotion Analyzer</h1>
+    <form action="/" method="post" enctype="multipart/form-data">
+        <input type="file" name="file" accept=".wav,.mp3">
+        <input type="submit" value="Analyze">
+    </form>
+
+    {% if results %}
+    <h2>Analysis Results</h2>
+    <div class="results">
+        {% for result in results %}
+        <div class="result-item">
+            <strong>{{ result.time }}</strong>: {{ result.emotion }}
+        </div>
+        {% endfor %}
+    </div>
+    <div class="chart">
+        <img src="data:image/png;base64,{{ plot_url }}" />
+    </div>
+    {% endif %}
+</body>
+</html>
